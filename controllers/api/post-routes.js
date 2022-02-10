@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Project } = require('../../models');
+const { Project, Post } = require('../../models');
 const { Category } = require('../../../CW-ECommerce/models');
 const withAuth = require('../../utils/auth')
 //Require the correct files from the models and authorizations
@@ -7,7 +7,7 @@ const withAuth = require('../../utils/auth')
 router.post('/', withAuth, async (req, res) => {
 //Complete the asychronous function with error handling
   try {
-    const newPost = await Project.create({
+    const newPost = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });
@@ -21,7 +21,7 @@ router.post('/', withAuth, async (req, res) => {
 router.put('/:id', withAuth, async (req, res) => {
 //Complete the asychronous function with error handling
   try {
-    const updateData = await Project.update(req.body, {
+    const updateData = await Post.update(req.body, {
       where: {id: req.params.id },
     });
 
@@ -40,7 +40,7 @@ router.put('/:id', withAuth, async (req, res) => {
 router.delete('/:id', withAuth, async (req, res) => {
   //Complete the asychronous function with error handling
   try {
-    const projectData = await Project.destroy({
+    const projectData = await Post.destroy({
       where: {
           id: req.params.id,
           user_id: req.session.user_id,
