@@ -6,7 +6,7 @@ const withAuth = require('../utils/auth');
 // get all posts for homepage
 router.get('/', async (req, res) => {
   try {
-      const projectData = await Project.findAll({
+      const projectData = await Post.findAll({
           include: [
               {
                   model: User,
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
           ],
         });
   
-        const projects = projectData.map((project) => project.get({ plain: true }));
+        const projects = projectData.map((Post) => Post.get({ plain: true }));
 
         res.render('homepage', {
             projects,
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 // get single post
 router.get('/post/:id', async (req, res) => {
     try {
-        const projectData = await Project.findByPk(req.params.id, {
+        const projectData = await Post.findByPk(req.params.id, {
           include: [
             {
               model: User,
@@ -38,10 +38,10 @@ router.get('/post/:id', async (req, res) => {
           ],
         });
     
-        const project = projectData.get({ plain: true });
+        const project = Post.get({ plain: true });
     
-        res.render('project', {
-          ...project,
+        res.render('Post', {
+          ...Post,
           logged_in: req.session.logged_in
         });
       } catch (err) {
