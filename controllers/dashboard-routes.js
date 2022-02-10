@@ -8,22 +8,23 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   //Create the correct asychronous get route for this function
   const projectData = await Project.findall({
-    include: [
-      {
-        model: Post,
-        attributes: ['post_id']
-      }
-    ]
-  })
+  where: {
+    user_id: req.session.user_id
+  }
+  
+  res.render('user-landing', {posts, user})
 });
 
 router.get('/new', withAuth, (req, res) => {
   // Create the correct get route
-  
+  res.render(newProject);
 });
 
 router.get('/edit/:id', withAuth, async (req, res) => {
   // Create the correct get route functionality using an asychronous function
+  const projectData = await Project.findByPk(req.params.id);
+  const project = projectData.get({ plain: true });
+  res.render('edit-project', project);
 });
 
 module.exports = router;
