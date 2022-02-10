@@ -8,6 +8,4 @@ router.use('/comments', commentRoutes);
 router.use('/posts', postRoutes);
 router.use('/users', userRoutes);
 //Create the router.use functionality for each required file
-
-
 module.exports = router;
