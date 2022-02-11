@@ -1,6 +1,6 @@
 // What needs to be required?
-const { Model, User } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/config.js');
 
 class Comment extends Model {}
 
@@ -13,20 +13,8 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-    },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    needed_funding: {
-      type: DataTypes.FLOAT,
+    body: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     user_id: {
@@ -35,6 +23,14 @@ Comment.init(
         model: 'user',
         key: 'id',
       },
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'post',
+        key: 'id',
+      },
+      onDelete: "CASCADE"
     },
   },
   {
