@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Project, User } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 //Require the correct files from the models
 
 router.post('/', async (req, res) => {
@@ -7,10 +7,10 @@ router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
-    req.session.save(() => {
+    req.session.save (() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-
+      
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   // Create the correct asychronous function for this login post request with error handling
   try {
-    const userData = await User.findOne({ where: {email: req.body.email} });
+    const userData = await User.findOne({ where: {email: req.body.username} });
 
     if (!userData) {
       res
@@ -30,12 +30,10 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const checkPassword = await userData.verifyPassword(req.body.password);
 
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, try again' });
+    if (!checkPassword) {
+      res.status(400).json({ message: 'Incorrect email or password, try again' });
     }
 
     req.session.save(() => {
