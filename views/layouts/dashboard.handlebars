@@ -4,28 +4,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Tech Blog</title>
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+  <title>Tech Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body class="flex-column min-100-vh">
-  <div class="navbar">
+  <header class="hero">
+    <h1 class="app-title"><a herf="/">View Your Dashboard</a></h1>
+  </header>
+
+  <nav class="navbar">
     <ul>
-      <li class="nav-item li-item"><a href="/">Tech Blog</a></li>
-      <li class="nav-item li-item"><a href="/dashboard">Dashboard</a></li>
-      <li class="nav-item li-item"><a href="/logout">Logout</a></li>
+      <li class="nav-item li-inline"><a href="/">Home</a></li>
+      <li class="nav-item li-inline"><a href="/dashboard">Dashboard</a></li>
+      <li class="nav-item li-inline"><a href="/login">Login</a></li>
+      <li class="nav-item li-inline"><a href="/signup">Sign Up</a></li>
     </ul>
-  </div>
-
-
-
-
-{{{ body }}}
-
+  </nav>
+  
+  <main>
+    {{{body}}}
+  </main>
 
 </body>
 
-<script src="/js/logout.js"></script>
-
 </html>
+<script src="/js/logout.js"></script>

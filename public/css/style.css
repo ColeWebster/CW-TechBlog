@@ -1,9 +1,9 @@
 :root {
-  --primary: #ccdad1;
-  --secondary: #9caea9;
-  --tertiary: #788585;
+  --primary: lightgrey;
+  --secondary: #3eddb0;
+  --tertiary: #063333;
   --light-dark: #6f6866;
-  --dark: #38302e;
+  --dark: navy;
   --border-radius: 0.3rem;
 }
 
@@ -109,11 +109,12 @@ input {
 
 .nav-item {
   margin: 0 40px;
+  
 }
 
 .nav-item a {
   color: var(--primary);
-}
+ }
 
 .hero {
   padding: 3% 4%;
@@ -169,7 +170,7 @@ input {
 /* CARDS */
 .card {
   margin: 0 0 20px 0;
-  border: 3px solid var(--dark);
+  border: 5px solid var(--dark);
   border-radius: var(--border-radius);
 }
 
