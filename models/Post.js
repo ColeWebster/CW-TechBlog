@@ -1,6 +1,6 @@
 // What are we missing to be required here?
-const { Model, User } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/config');
 
 class Post extends Model {}
 
@@ -13,20 +13,12 @@ Post.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-    },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    needed_funding: {
-      type: DataTypes.FLOAT,
+    body: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     user_id: {
@@ -35,11 +27,11 @@ Post.init(
         model: 'user',
         key: 'id',
       },
+      onDelete: "CASCADE"
     },
   },
   {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'post',
