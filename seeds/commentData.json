@@ -1,7 +1,17 @@
 [
 	{
-		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar porta risus sit amet varius. Ut euismod commodo sem, ac gravida quam porttitor vitae.",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis ultrices ipsum. Suspendisse tincidunt tellus sit amet tellus fermentum, et pellentesque urna eleifend. Duis congue orci eu dolor gravida, a eleifend ex convallis. Maecenas sed metus at lectus facilisis pellentesque. Etiam malesuada venenatis sapien, quis tristique arcu. Nunc quis ultrices diam. Quisque tincidunt massa vel sem aliquet accumsan.",
 		"user_id": 1,
 		"post_id": 1
+	},
+	{
+		"text": "Etiam et porttitor mauris. Nullam sed laoreet eros. Fusce id dapibus leo. Vivamus tristique vestibulum elit, nec tempor nisl fringilla sit amet. Integer pellentesque, velit a facilisis mattis, erat massa molestie erat, vel hendrerit diam odio id mauris. Quisque felis mauris, malesuada id ante vel, maximus gravida arcu.",
+		"user_id": 3,
+		"post_id": 2
+	},
+	{
+		"text": "Nam non diam at nunc vehicula scelerisque sodales non massa. Pellentesque ac felis pellentesque, accumsan nisl non, vulputate libero. Curabitur diam tellus, sagittis in pellentesque sed, dignissim efficitur diam. Pellentesque suscipit sit amet orci id pellentesque. Fusce ornare tincidunt odio eu pharetra. Fusce ut nunc vitae ipsum rhoncus gravida ac nec justo. Quisque et arcu turpis.",
+		"user_id": 2,
+		"post_id": 3
 	}
 ]
