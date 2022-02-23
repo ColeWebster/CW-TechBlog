@@ -1,62 +1,33 @@
 const router = require('express').Router();
-const { Project } = require('../../../inclass/week8/day2/28-Stu_Mini-Project/Main/models');
 const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 // get all posts for homepage
-router.get('/', async (req, res) => {
-  try {
-      const projectData = await Post.findAll({
-          include: [
-              {
-                  model: User,
-                  attributes: ['name'],
-              },
-          ],
-        });
-  
-        const projects = projectData.map((Post) => Post.get({ plain: true }));
-
-        res.render('all-posts', {
-            projects,
-            logged_in: req.session.logged_in
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
+router.get("/", async (req,res) => {
+  const postData = await Post.findAll({
+    include: [{model: User}]
+  });
+  const posts = postData.map(element => {
+    return element.get({plain: true});
+  });
+  res.render("all-posts", {posts});
 });
+
 
 // get single post
 router.get('/post/:id', async (req, res) => {
-    try {
-        const projectData = await Post.findByPk(req.params.id, {
-          include: [
-            {
-              model: User,
-              attributes: ['name'],
-            },
-          ],
-        });
-    
-        const project = Post.get({ plain: true });
-    
-        res.render('Post', {
-          ...Post,
-          logged_in: req.session.logged_in
-        });
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    });
+  const postData = await Post.findByPk(req.params.id,{
+    include: [{model: User}, {model: Comment, include: {model: User}}]
+  });
+  const post = postData.get({plain:true});
+  res.render("single-post", {post, user_id: req.session.user_id});
+});
+     
+
 
 router.get('/login', (req, res) => {
-    if (req.session.logged_in) {
-        res.redirect('/profile');
-        return;
-      }
-    
-      res.render('login');
-    });
+  res.render('login');
+});
 
 router.get('/signup', (req, res) => {
   res.render('signup');
