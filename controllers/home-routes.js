@@ -15,20 +15,36 @@ router.get("/", async (req, res) => {
       posts,
       logged_in: req.session.logged_in,
     });
-  }
+  } catch (err) {
+		res.status(500).json(err);
 });
 
 
 // get single post
 router.get('/post/:id', async (req, res) => {
-  const postData = await Post.findByPk(req.params.id, {
-    include: [{ model: User }, { model: Comment, include: { model: User } }]
-  });
-  const post = postData.get({ plain: true });
-  res.render("single-post", { post, user_id: req.session.user_id });
+	try {
+		const postData = await Post.findByPk(req.params.id, {
+			include: [
+				{ model: User },
+				{model: Comment, include: {model: User,},},
+			],
+		});
+
+		if (!postData) {
+			res.status(404).json({ message: 'No post by that ID' });
+		}
+		const post = postData.get({ plain: true });
+		const comments = post.comments;
+
+		res.render('single-post', {
+			post,
+			comments,
+			logged_in: req.session.logged_in,
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
 });
-
-
 
 router.get('/login', (req, res) => {
   res.render('login');
@@ -36,6 +52,23 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
   res.render('signup');
+});
+
+router.get('/dashboard', withAuth, async (req,res) => {
+  try {
+    const userData = await User.findByPk(rew.session.user_id, {
+      attributes: {exclude: ['password']},
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({plain: true});
+
+    res.render('dashboard', {
+    ...User,
+    logged_in: req.session.logged_in,
+  });
+  } catch (err) {
+		res.status(500).json(err); 
 });
 
 module.exports = router;
