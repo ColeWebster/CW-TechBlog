@@ -1,15 +1,18 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../../models');
+const { User } = require('../../models');
 //Require the correct files from the models
 
 router.post('/', async (req, res) => {
   // Create the correct asychronous function for this login post request with error handling
   try {
-    const userData = await User.create(req.body);
-
-    req.session.save (() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+    const userData = await User.create({
+        username: req.body.username,
+        password: req.body.password,
+      });
+      
+      req.session.save (() => {
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
       
       res.status(200).json(userData);
     });
