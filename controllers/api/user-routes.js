@@ -33,7 +33,10 @@ router.post('/login', async (req, res) => {
     const checkPassword = await userData.verifyPassword(req.body.password);
 
     if (!checkPassword) {
-      res.status(400).json({ message: 'Incorrect email or password, try again' });
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, try again' });
+      return;
     }
 
     req.session.save(() => {
